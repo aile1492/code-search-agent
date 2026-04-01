@@ -24,7 +24,8 @@ Thumbs.db
 # ChromaDB
 chroma_db/
 
-# sentence-transformers cache
+# ONNX model cache
+models/
 .cache/
 
 # Claude Code
