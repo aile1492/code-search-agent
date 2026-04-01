@@ -24,6 +24,13 @@ export default function SearchWindow() {
         getProjects().then(setProjects);
       }
     });
+
+    // Keep server alive - ping every 5 minutes (Render free tier sleeps after 15min inactivity)
+    const keepAlive = setInterval(() => {
+      wakeServer();
+    }, 5 * 60 * 1000);
+
+    return () => clearInterval(keepAlive);
   }, []);
 
   const refreshProjects = async () => {
