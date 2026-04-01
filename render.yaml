@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: code-search-agent
+    runtime: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: DEFAULT_PROVIDER
+        value: groq
+      - key: ALLOWED_ORIGINS
+        value: https://code-search-agent.vercel.app
+      - key: CHROMA_PERSIST_DIR
+        value: ./chroma_db
