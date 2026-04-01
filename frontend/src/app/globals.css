@@ -1,0 +1,129 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Code syntax highlighting (highlight.js github theme) */
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+.hljs {
+  background: #f6f8fa;
+  color: #24292e;
+  border-radius: 0.5rem;
+}
+@media (prefers-color-scheme: dark) {
+  .hljs {
+    background: #1e293b;
+    color: #e2e8f0;
+  }
+}
+.hljs-keyword, .hljs-selector-tag, .hljs-type { color: #d73a49; }
+.hljs-string, .hljs-addition { color: #22863a; }
+.hljs-comment, .hljs-meta { color: #6a737d; }
+.hljs-number, .hljs-literal { color: #005cc5; }
+.hljs-function .hljs-title, .hljs-title.function_ { color: #6f42c1; }
+.hljs-attr, .hljs-attribute { color: #005cc5; }
+@media (prefers-color-scheme: dark) {
+  .hljs-keyword, .hljs-selector-tag, .hljs-type { color: #ff7b72; }
+  .hljs-string, .hljs-addition { color: #7ee787; }
+  .hljs-comment, .hljs-meta { color: #8b949e; }
+  .hljs-number, .hljs-literal { color: #79c0ff; }
+  .hljs-function .hljs-title, .hljs-title.function_ { color: #d2a8ff; }
+  .hljs-attr, .hljs-attribute { color: #79c0ff; }
+}
+
+/* Smooth transitions for layout changes */
+.transition-layout {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+@media (prefers-color-scheme: dark) {
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+}
+
+/* Line clamp utility */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Fade-in animation for new elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Prose table improvements */
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.prose th,
+.prose td {
+  border: 1px solid #e5e7eb;
+}
+@media (prefers-color-scheme: dark) {
+  .prose th,
+  .prose td {
+    border-color: #374151;
+  }
+}
