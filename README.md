@@ -102,6 +102,9 @@ curl -X POST http://localhost:8002/api/index \
 | GET | `/api/projects` | 등록된 프로젝트 목록 확인 |
 | DELETE | `/api/projects/{name}` | 등록된 프로젝트 삭제 |
 | POST | `/api/search` | AI 코드 검색 시작 |
+| POST | `/api/search/raw` | LLM 없이 의미 검색 결과와 코드 위치 반환 |
+
+`/api/search/raw`는 다른 개발 도구가 Code Search Agent를 검색 Tool로 재사용할 때 사용합니다. 답변 생성과 API Key 없이 ChromaDB 검색 결과만 JSON으로 반환합니다.
 
 ## 라이선스
 
