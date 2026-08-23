@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class IndexRequest(BaseModel):
@@ -12,6 +12,12 @@ class SearchRequest(BaseModel):
     session_id: str | None = None
     provider: str | None = None  # "gemini" | "anthropic" | "groq"
     api_key: str | None = None  # user-provided API key
+
+
+class RawSearchRequest(BaseModel):
+    query: str
+    project: str | None = None
+    n_results: int = Field(default=10, ge=1, le=25)
 
 
 class IndexStatusResponse(BaseModel):

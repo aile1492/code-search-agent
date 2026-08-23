@@ -5,7 +5,7 @@ from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from app.config import ALLOWED_ORIGINS
-from app.models import IndexRequest, SearchRequest, IndexStatusResponse
+from app.models import IndexRequest, SearchRequest, RawSearchRequest, IndexStatusResponse
 from app.indexer.index_manager import (
     index_project, list_projects, delete_project, search_code,
 )
@@ -113,6 +113,26 @@ async def search(request: SearchRequest):
             "X-Accel-Buffering": "no",
         },
     )
+
+
+@app.post("/api/search/raw")
+async def raw_search(request: RawSearchRequest):
+    """LLM 없이 의미 검색 결과와 코드 위치를 JSON으로 반환합니다."""
+    try:
+        results = search_code(
+            request.query,
+            request.project,
+            n_results=request.n_results,
+        )
+        return {
+            "query": request.query,
+            "project": request.project,
+            "result_count": len(results),
+            "results": results,
+            "status": "ok",
+        }
+    except Exception as e:
+        return {"error": str(e), "status": "failed"}
 
 
 if __name__ == "__main__":
